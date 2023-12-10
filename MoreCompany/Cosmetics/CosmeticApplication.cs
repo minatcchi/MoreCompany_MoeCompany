@@ -14,17 +14,23 @@ namespace MoreCompany.Cosmetics
         public Transform chest;
         public List<CosmeticInstance> spawnedCosmetics = new List<CosmeticInstance>();
 
-        public void Awake()
+        public void Start()
         {
-            head = transform.Find("spine").Find("spine.001").Find("spine.002").Find("spine.003").Find("spine.004");
+            head = FindDeepChild(transform, "spine/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x");
+            if (head == null)
+            {
+                head = FindDeepChild(transform, "spine/spine.001/spine.002/spine.003/spine.004");
+            }
+
             chest = transform.Find("spine").Find("spine.001").Find("spine.002").Find("spine.003");
             lowerArmRight = transform.Find("spine").Find("spine.001").Find("spine.002").Find("spine.003").Find("shoulder.R").Find("arm.R_upper").Find("arm.R_lower");
             hip = transform.Find("spine");
             shinLeft = transform.Find("spine").Find("thigh.L").Find("shin.L");
             shinRight = transform.Find("spine").Find("thigh.R").Find("shin.R");
-
+            Debug.Log("Transforms set to wrong transforms from more company");
             RefreshAllCosmeticPositions();
         }
+
 
         private void OnDisable()
         {
@@ -69,6 +75,11 @@ namespace MoreCompany.Cosmetics
         
         public void RefreshAllCosmeticPositions()
         {
+            head = FindDeepChild(transform, "spine/root.x/spine_01.x/spine_02.x/spine_03.x/neck.x/head.x");
+            if (head == null)
+            {
+                head = FindDeepChild(transform, "spine/spine.001/spine.002/spine.003/spine.004");
+            }
             foreach (var spawnedCosmetic in spawnedCosmetics)
             {
                 ParentCosmetic(spawnedCosmetic);
@@ -104,5 +115,16 @@ namespace MoreCompany.Cosmetics
             cosmeticInstance.transform.rotation = targetTransform.rotation;
             cosmeticInstance.transform.parent = targetTransform;
         }
+        Transform FindDeepChild(Transform parent, string path)
+        {
+            Transform current = parent;
+            foreach (var name in path.Split('/'))
+            {
+                if (current == null) return null;
+                current = current.Find(name);
+            }
+            return current;
+        }
     }
+ 
 }
