@@ -12,14 +12,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-			<LethalCompanyPath>D:\SteamLibrary\steamapps\common\Lethal Company\</LethalCompanyPath>
-
   </PropertyGroup>
-  	<PropertyGroup>
-		<ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Managed</ReferencePath>
-		<ReferencePath>$(ReferencePath);$(LethalCompanyPath)\Lethal Company_Data\Plugins</ReferencePath>
-		<ReferencePath>$(ReferencePath);$(LethalCompanyPath)\BepinEx\plugins</ReferencePath>
-	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -42,7 +35,7 @@
       <HintPath>..\..\LethalCompany_ModelReplacementAPI_Moe_Company\Libraries\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\LethalCompany_ModelReplacementAPI_Moe_Company\Libraries\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\LethalCompany_ModelReplacementAPI_Moe_Company\Libraries\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\LethalCompany_ModelReplacementAPI_Moe_Company\Libraries\Assembly-CSharp-firstpass.dll</HintPath>
@@ -91,10 +84,6 @@
     <Reference Include="Unity.Collections">
       <HintPath>..\..\LethalCompany_ModelReplacementAPI_Moe_Company\Libraries\Unity.Collections.dll</HintPath>
     </Reference>
-			<Reference Include="Assembly-CSharp" Publicize="true">
-			<HintPath>$(LethalCompanyPath)\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>..\..\LethalCompany_ModelReplacementAPI_Moe_Company\Libraries\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
@@ -477,11 +466,8 @@
     <EmbeddedResource Include="Resources\morecompany.cosmetics" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;\\mina\Lethal Company\BepInEx\plugins\$(ProjectName).dll&quot;" />
-    <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;D:\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\$(ProjectName).dll&quot;" />
-	    <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;C:\Users\mina\git\modelreplacement4\LethalCompany_ModelReplacementAPI_Moe_Company\Libraries\$(ProjectName).dll&quot;" />
-
-</Target>
-
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;\\mina\Lethal Company\BepInEx\plugins\$(ProjectName).dll&quot;" />
+		<Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;D:\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\$(ProjectName).dll&quot;" />
+	</Target>
 </Project>
