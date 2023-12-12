@@ -34,7 +34,9 @@ namespace MoreCompany.Cosmetics
         {
             foreach (var spawnedCosmetic in spawnedCosmetics)
             {
+                if (spawnedCosmetic != null) { 
                 spawnedCosmetic.gameObject.SetActive(false);
+            }
             }
         }
 
@@ -42,15 +44,23 @@ namespace MoreCompany.Cosmetics
         {
             foreach (var spawnedCosmetic in spawnedCosmetics)
             {
-                spawnedCosmetic.gameObject.SetActive(true);
-            }
+                if (spawnedCosmetic != null)
+                {
+
+                    spawnedCosmetic.gameObject.SetActive(true);
+                }
+                }
         }
 
         public void ClearCosmetics()
         {
             foreach (var spawnedCosmetic in spawnedCosmetics)
             {
-                GameObject.Destroy(spawnedCosmetic.gameObject);
+                if (spawnedCosmetic != null)
+                {
+
+                    GameObject.Destroy(spawnedCosmetic.gameObject);
+                }
             }
             spawnedCosmetics.Clear();
         }
@@ -74,8 +84,10 @@ namespace MoreCompany.Cosmetics
         public void RefreshAllCosmeticPositions()
         {
             foreach (var spawnedCosmetic in spawnedCosmetics)
-            {
+            { 
+                if (spawnedCosmetic != null) { 
                 ParentCosmetic(spawnedCosmetic);
+                }
             }
         }
 
